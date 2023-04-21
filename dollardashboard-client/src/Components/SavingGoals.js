@@ -37,10 +37,10 @@ const SavingGoals = () => {
 
   return (
     <Wrapper>
-      <Title>{user}'s Saving Goals</Title>
+      <Title>Your Saving Goals</Title>
       <GoalsContainer>
         {goals.map((goal) => (
-            <Link to={`http://localhost:3000/saving/${goal._id}`}>
+            <Link to={`/saving/${goal._id}`}>
             <Goal key={goal._id}>
             <GoalTitle>{goal.goalName}</GoalTitle>
             <CircularProgressbar value={(goal.progress/goal.target)*100} text={`${(goal.progress/goal.target)*100}%`} />

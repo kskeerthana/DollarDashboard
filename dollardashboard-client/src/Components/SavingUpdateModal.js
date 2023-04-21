@@ -22,8 +22,6 @@ function UpdateGoalModal({ goal, onUpdate }) {
         target,
         endDate,
       };
-      const token = localStorage.getItem('token');
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       await axios.put(`http://localhost:8000/api/saving/${goal._id}`, updatedGoal);
       onUpdate(updatedGoal);
       setShow(false);

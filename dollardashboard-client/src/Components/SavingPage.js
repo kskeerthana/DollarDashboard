@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker';
 import { Card, Button, Modal, Form, Alert } from 'react-bootstrap';
 import { FaTrashAlt, FaEdit, FaPlus} from 'react-icons/fa';
 import "./SavingPage.css";
+import Contributions from './Contributions';
 import UpdateGoalModal from './SavingUpdateModal';
 
 const GoalDetails = () => {
@@ -14,31 +15,36 @@ const GoalDetails = () => {
   const [success, setSuccess] = useState(false);
   const [goalProgress, setGoalProgress] = useState(0);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [myFunction, setMyFunction] = useState(null);
   const navigate = useNavigate();
 
+  const getGoal = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      console.log("On saving")
+      const response = await axios.get(`http://localhost:8000/api/saving/${id}`);
+      setGoal(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
-    const getGoal = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        const response = await axios.get(`http://localhost:8000/api/saving/${id}`);
-        setGoal(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
     getGoal();
+    setMyFunction(getGoal);
   }, [id]);
 
-  const handleSave = async () => {
+  const handleContribution = async () => {
     try {
-        console.log('In update modal')
-      const updatedGoal = {
-        ...goal,
-        progress: goalProgress
+      console.log('In contribution modal')
+      const addContribution = {
+        goalId: id,
+        amount: goalProgress
       };
-      await axios.put(`http://localhost:8000/api/saving/${goal._id}`, updatedGoal);
-      handleUpdated(updatedGoal);
+      await axios.post(`http://localhost:8000/api/contribution`, addContribution);
+      setSuccess(true);
+      setShowModal(false);
+      getGoal();
     } catch (error) {
       console.error(error);
     }
@@ -52,8 +58,10 @@ const GoalDetails = () => {
     setShowModal(false);
   };
 
+  const handleContributionAdd = () => {
+    getGoal();
+  }
   
-
   const handleUpdated = (updatedGoal) => {
     setSuccess(true);
     setShowModal(false);
@@ -102,11 +110,11 @@ const GoalDetails = () => {
                 <div className="goal-info">
                     <div className="goal-info-item">
                     <span className="goal-info-label">Target:</span>
-                    <span className="goal-info-value">{goal.target}</span>
+                    <span className="goal-info-value">${goal.target}</span>
                     </div>
                     <div className="goal-info-item">
                     <span className="goal-info-label">Progress:</span>
-                    <span className="goal-info-value">{goal.progress}</span>
+                    <span className="goal-info-value">${goal.progress}</span>
                     </div>
                     <div className="goal-info-item">
                     <span className="goal-info-label">Days remaining:</span>
@@ -115,21 +123,21 @@ const GoalDetails = () => {
                 </div>
             </Card.Text>
           <div className="card-button">
-            {/* <Button variant="primary" onClick={handleModal}>
-              <FaEdit /> Update
-            </Button> */}
             <UpdateGoalModal goal={goal} onUpdate={handleUpdated}/>
+            <div className="button-group">
             <Button variant="success" onClick={handleContriModal}>
               <FaPlus /> Add Contribution
             </Button>
             <Button variant="danger" onClick={() => setShowConfirmation(true)}>
               <FaTrashAlt /> Delete
             </Button>
+            </div>
           </div>
         </Card.Body>
       </Card>
       
     </div>
+    <Contributions goalId={goal._id} success={success} onDeleteContri={handleContributionAdd}></Contributions>
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Contribution to Your Saving</Modal.Title>
@@ -149,7 +157,7 @@ const GoalDetails = () => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleSave}>
+          <Button variant="primary" onClick={handleContribution}>
             Save Changes
           </Button>
         </Modal.Footer>
