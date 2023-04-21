@@ -13,7 +13,8 @@ app.use(express.json())
 app.use(cors());
 app.use(express.urlencoded({extended: false}))
 
-
+app.use('/api/contribution', require('./routes/contributionRoutes'))
+app.use('/api/saving', require('./routes/savingRoutes'))
 app.use('/api/user', require('./routes/userRoutes'))
 
 app.use(errorHandler)

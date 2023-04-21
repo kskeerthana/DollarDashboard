@@ -22,14 +22,14 @@ const registerUser = asyncHandler(async (req, res) => {
     if (!name || typeof name !== "string" || name.trim().length === 0) {
         res.status(400);
         throw new Error("Please enter a valid name");
-    }
+      }
 
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    // const validEmail = emailRegex.test(email) && email.endsWith('@northeastern.edu')
-    // if (!validEmail) {
-    //     res.status(400)
-    //     throw new Error('Please enter a valid Northeastern University email address')
-    // }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const validEmail = emailRegex.test(email) && email.endsWith('@northeastern.edu')
+    if (!validEmail) {
+    res.status(400)
+    throw new Error('Please enter a valid Northeastern University email address')
+    }
 
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
     const validPassword = passwordRegex.test(password)
@@ -55,14 +55,10 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password: hashedPassword,
-        age: '',
-        contact: '',
-        gender: '',
-        googleSignIn: false
+        password: hashedPassword
     })
 
-    if (user) {
+    if(user){
         res.status(201).json({
             _id: user.id,
             name: user.name,
