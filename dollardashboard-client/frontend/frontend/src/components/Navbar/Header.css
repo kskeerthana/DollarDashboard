@@ -1,0 +1,41 @@
+.profile-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .profile-icon svg {
+    fill: #bababa;
+    transition: fill 0.2s;
+    margin-right: 5px;
+  }
+  
+  .profile-icon span {
+    margin-left: 5px;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .profile-icon:hover svg {
+    fill: #ffc107;
+  }
+  
+  .profile-dropdown {
+    position: absolute;
+    /* top: 100%; */
+    right: 0;
+    z-index: 10;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-toggler {
+      border-color: #fff;
+    }
+    .profile-dropdown {
+        left: 0;
+        right: auto;
+      }
+  }
+  

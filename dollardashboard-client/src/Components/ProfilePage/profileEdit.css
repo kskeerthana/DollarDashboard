@@ -1,0 +1,144 @@
+.profileEditForm {
+
+    width: 50%;
+    margin: auto;
+    /* border: solid 2px black; */
+    padding: 2%;
+    border-radius: 2%;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    
+}
+
+.dispImageOuter{
+    text-align: center;
+}
+
+.profileImage {
+
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+.uploadImage{
+    display: inline-block;
+}
+
+.profileEditButtons{
+
+    display: 'flex';
+    /* justifyContent: 'space-between'  */
+   
+}
+
+.inputBox{
+    border: "none";
+    border-Bottom: "1px solid black"
+
+}
+
+@media screen and (max-width: 768px) {
+    .profileEditForm {
+        width: 80%;
+        margin: auto;
+        border: solid 2px black;
+        /* padding: auto; */
+        padding: 5%;
+        
+    }
+    .dispImageOuter{
+        text-align: center;
+    }
+
+    .profileImage {
+
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+    .uploadImage{
+        display: inline-block;
+    }
+}
+
+
+
+@media screen and (max-width: 480px) {
+    .profileEditForm {
+
+        width: 80%;
+        margin: auto;
+        border: solid 2px black;
+        /* padding: auto; */
+        padding: 5%;
+       
+        
+    }
+    .dispImageOuter{
+        text-align: center;
+    }
+
+    .profileImage {
+
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+    .uploadImage{
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .profileEditForm {
+
+        width: 80%;
+        margin: auto;
+        border: solid 2px black;
+        padding: 5%;
+        
+    }
+
+    .profileImage {
+
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+    .uploadImage{
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .profileEditForm {
+        width: 80%;
+        margin: auto;
+        border: solid 2px black;
+        /* padding: auto; */
+        padding: 5%;
+        
+    }
+    .dispImageOuter{
+        text-align: center;
+    }
+
+    .profileImage {
+
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid black;
+    }
+    .uploadImage{
+        display: inline-block;
+    }
+}
