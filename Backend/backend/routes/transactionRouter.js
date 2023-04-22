@@ -10,7 +10,7 @@ const {
     getParticularTransactions
 } = require("../controller/transactionController");
 
-const {protect} = require("../services/authService")
+const {protect} = require("../../services/authService")
 const router = express.Router();
 
 router.route("/getTransaction").get(protect,getAllTransactions);

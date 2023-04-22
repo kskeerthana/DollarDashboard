@@ -1,5 +1,5 @@
 const { request } = require("express");
-const TransactionModel = require("../models/transactions");
+const TransactionModel = require("../backend/models/transactions");
 const User = require("../models/userModel")
  
 exports.getAllTransactions = async (id,{query}) => {
