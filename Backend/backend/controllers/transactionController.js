@@ -1,6 +1,6 @@
 const TransactionModel = require("../models/transactions");
-const userModel = require("../../models/userModel");
-const transactionService = require("../../services/transactionServices");
+const userModel = require("../models/userModel");
+const transactionService = require("../services/transactionServices");
 
 
 exports.getAllTransactions = async (req, res) => {
