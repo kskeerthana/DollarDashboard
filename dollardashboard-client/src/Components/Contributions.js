@@ -3,14 +3,21 @@ import { Card, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { FaTrash } from 'react-icons/fa';
 import './Contribution.css';
+// import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Contributions = ({ goalId, success, onDeleteContri }) => {
   const [contributions, setContributions] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [contributionToDelete, setContributionToDelete] = useState(null);
   const [contributionCount, setContributionCount] = useState(1);
+  const navigate = useNavigate();
 
   useEffect(() => {
+      if(!localStorage.getItem('username')){
+          console.log('noUser')
+          navigate('/');
+        }
     const fetchContributions = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/contribution/${goalId}`);

@@ -24,12 +24,12 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("Please enter a valid name");
       }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const validEmail = emailRegex.test(email) && email.endsWith('@northeastern.edu')
-    if (!validEmail) {
-    res.status(400)
-    throw new Error('Please enter a valid Northeastern University email address')
-    }
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    // const validEmail = emailRegex.test(email) && email.endsWith('@northeastern.edu')
+    // if (!validEmail) {
+    // res.status(400)
+    // throw new Error('Please enter a valid Northeastern University email address')
+    // }
 
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
     const validPassword = passwordRegex.test(password)

@@ -30,6 +30,12 @@ const GoalDetails = () => {
     }
   };
   useEffect(() => {
+
+    if(!localStorage.getItem('username')){
+      console.log('noUser')
+      navigate('/');
+    }
+
     getGoal();
     setMyFunction(getGoal);
   }, [id]);

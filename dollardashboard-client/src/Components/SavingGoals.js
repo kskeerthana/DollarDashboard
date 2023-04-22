@@ -4,13 +4,23 @@ import axios from "axios";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
+//import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+// import './SavingGoals.css'
 
 const SavingGoals = () => {
   const [goals, setGoals] = useState([]);
   const [user, setUser] = useState("");
   const [goalProgress, setProgress] = useState(0)
+  const navigate = useNavigate();
 
   useEffect(() => {
+
+    if(!localStorage.getItem('username')){
+      console.log('noUser')
+      navigate('/');
+    }
+
     const token = localStorage.getItem('token');
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         console.log(token)
@@ -36,8 +46,8 @@ const SavingGoals = () => {
   });
 
   return (
-    <Wrapper>
-      <Title>Your Saving Goals</Title>
+    <Wrapper >
+      <Title style={{margin:'20px'}}>Your Saving Goals</Title>
       <GoalsContainer>
         {goals.map((goal) => (
             <Link to={`/saving/${goal._id}`}>
@@ -80,6 +90,15 @@ const Goal = styled.div`
   height: 150px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color:beige;
+  padding:10px;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color:#EF9606;
+    cursor: pointer;
+  }
+
 `;
 
 const GoalTitle = styled.h2`

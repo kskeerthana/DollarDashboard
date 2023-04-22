@@ -8,6 +8,8 @@ import { FaUpload } from 'react-icons/fa';
 // import { imageHolder } from '../ProfilePage/ImageHolder/profileImageHolder.png'
 import imageHolder from '../ProfilePage/ImageHolder/profileImageHolder.png';
 import './profileEdit.css';
+import Sidebar from '../SideBar/Sidebar';
+import { HamBurger } from '../HamBurger/HamBurger';
 
 export const ProfileEdit = () => {
 
@@ -24,6 +26,10 @@ export const ProfileEdit = () => {
 
 
     useEffect(() => {
+        if (!localStorage.getItem('username')) {
+            console.log('noUser')
+            navigate('/');
+        }
         getUserData();
         console.log('hello')
     }, []);
@@ -99,28 +105,28 @@ export const ProfileEdit = () => {
 
 
             // Validate name field
-  if (name.trim() === '') {
-    alert('Please enter a name');
-    return;
-  }
-  
-  // Validate age field
-  if (isNaN(age) || age <= 0 || age > 120) {
-    alert('Please enter a valid age');
-    return;
-  }
-  
-  // Validate contact field
-  if (!/^\d{10}$/.test(contact)) {
-    alert('Please enter a valid phone number with 10 digits');
-    return;
-}
-  
-  // Validate gender field
-  if (gender === 'Choose...') {
-    alert('Please select a gender');
-    return;
-  }
+            if (name.trim() === '') {
+                alert('Please enter a name');
+                return;
+            }
+
+            // Validate age field
+            if (isNaN(age) || age <= 0 || age > 120) {
+                alert('Please enter a valid age');
+                return;
+            }
+
+            // Validate contact field
+            if (!/^\d{10}$/.test(contact)) {
+                alert('Please enter a valid phone number with 10 digits');
+                return;
+            }
+
+            // Validate gender field
+            if (gender === 'Choose...') {
+                alert('Please select a gender');
+                return;
+            }
 
 
             const responseImage = await axios.post('http://localhost:8000/api/user/imageUpload', formData).then((response) => {
@@ -158,74 +164,68 @@ export const ProfileEdit = () => {
 
     return (
         <>
-            <div>ProfilePage</div>
-            <div>
+                    <HamBurger></HamBurger>
+                    <h1 class="header-title">User Profile Page</h1>
+                    <div>
 
-                <Form onSubmit={handleSubmit} className='profileEditForm'>
-                    <div className='dispImageOuter'>
-                        {base64String == undefined ? <img src={imageHolder} width="300" className='profileImage' /> : <img src={`data:image/png;base64,${base64String}`} width="300" className='profileImage' />}
+                        <Form onSubmit={handleSubmit} className='profileEditForm'>
+                            <div className='dispImageOuter'>
+                                {base64String == undefined ? <img src={imageHolder} width="300" className='profileImage' /> : <img src={`data:image/png;base64,${base64String}`} width="300" className='profileImage' />}
 
-                        <Form.Group controlId="formName">
-                            <Form.Label htmlFor="image-upload" className='uploadImage' >
-                                <FaUpload size={20} />
-                            </Form.Label>
-                            <Form.Control
-                                id="image-upload"
-                                type="file"
-                                accept="image/*"
-                                style={{ display: 'none' }}
-                                onChange={(e) => { setImage(e.target.files[0]); setImageName(e.target.files[0].name); }}
-                            />
-                        </Form.Group>
+                                <Form.Group controlId="formName">
+                                    <Form.Label htmlFor="image-upload" className='uploadImage' >
+                                        <FaUpload size={20} />
+                                    </Form.Label>
+                                    <Form.Control
+                                        id="image-upload"
+                                        type="file"
+                                        accept="image/*"
+                                        style={{ display: 'none' }}
+                                        onChange={(e) => { setImage(e.target.files[0]); setImageName(e.target.files[0].name); }}
+                                    />
+                                </Form.Group>
+                            </div>
+                            <Form.Group controlId="formName">
+                                <Form.Label style={{ color: 'white' }}>Name</Form.Label>
+                                <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} style={{ border: "none", borderBottom: "1px solid black" }} />
+                            </Form.Group>
+
+                            <Form.Group controlId="formAge">
+                                <Form.Label style={{ color: 'white' }}>Age</Form.Label>
+                                <Form.Control type="number" placeholder="Enter age" value={age} onChange={(e) => setAge(e.target.value)} style={{ border: "none", borderBottom: "1px solid black" }} />
+                            </Form.Group>
+
+                            <Form.Group controlId="formContact">
+                                <Form.Label style={{ color: 'white' }}>Contact</Form.Label>
+                                <Form.Control type="number" placeholder="Enter contact" value={contact} onChange={(e) => setContact(e.target.value)} style={{ border: "none", borderBottom: "1px solid black" }} />
+                            </Form.Group>
+
+                            <Form.Group controlId="formGender">
+                                <Form.Label style={{ color: 'white' }}>Gender</Form.Label>
+                                <Form.Control as="select" defaultValue="Choose..." value={gender} onChange={(e) => setGender(e.target.value)} style={{ border: "none", borderBottom: "1px solid black" }}>
+                                    <option>Choose...</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div style={{ flexGrow: 0 }}></div>
+                                <div style={{ display: 'inline-block' }}>
+                                    <Button variant="primary" type="submit" style={{ width: '100px' }} >Save</Button>
+                                </div>
+                                <div style={{ display: 'inline-block', marginTop: '12px' }}>
+                                    <Button variant="primary" onClick={() => navigate('/dashboard')} style={{ width: '100px', padding: '7px' }} >Cancel</Button>
+                                </div>
+                                <div style={{ flexGrow: 0 }}></div>
+                            </div>
+
+
+                        </Form>
                     </div>
-                    <Form.Group controlId="formName">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} style={{ border: "none", borderBottom: "1px solid black" }} />
-                    </Form.Group>
+                </>
 
-                    <Form.Group controlId="formAge">
-                        <Form.Label>Age</Form.Label>
-                        <Form.Control type="number" placeholder="Enter age" value={age} onChange={(e) => setAge(e.target.value)} style={{ border: "none", borderBottom: "1px solid black" }} />
-                    </Form.Group>
-
-                    <Form.Group controlId="formContact">
-                        <Form.Label>Contact</Form.Label>
-                        <Form.Control type="number" placeholder="Enter contact" value={contact} onChange={(e) => setContact(e.target.value)} style={{ border: "none", borderBottom: "1px solid black" }} />
-                    </Form.Group>
-
-                    <Form.Group controlId="formGender">
-                        <Form.Label>Gender</Form.Label>
-                        <Form.Control as="select" defaultValue="Choose..." value={gender} onChange={(e) => setGender(e.target.value)} style={{ border: "none", borderBottom: "1px solid black" }}>
-                            <option>Choose...</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </Form.Control>
-                    </Form.Group>
-                    {/* <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Button variant="primary" type="submit" style={{ display: 'inline-block' }}>Save</Button>                       
-                        <Button variant="primary" onClick={() => navigate('/profile')} style={{ display: 'inline-block' }}>
-                            Cancel
-                        </Button>
-                    </div> */}
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <div style={{ flexGrow: 0 }}></div>
-                        <div style={{ display: 'inline-block' }}>
-                            <Button variant="primary" type="submit" style={{ width:'100px'}} >Save</Button>
-                        </div>
-                        <div style={{ display: 'inline-block', marginTop:'12px'}}>
-                            <Button variant="primary" onClick={() => navigate('/dashboard')} style={{ width:'100px',padding:'7px'}} >Cancel</Button>
-                        </div>
-                        <div style={{ flexGrow: 0 }}></div>
-                    </div>
-
-
-                </Form>
-
-            </div>
-        </>
-
-    )
+                )
 }
 
 // export default ProfileEdit;
