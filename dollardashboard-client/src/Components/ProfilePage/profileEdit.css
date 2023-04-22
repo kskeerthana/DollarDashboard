@@ -1,11 +1,12 @@
 .profileEditForm {
 
-    width: 50%;
+    width: 30%;
     margin: auto;
     /* border: solid 2px black; */
     padding: 2%;
     border-radius: 2%;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #2D3A3A;
     
 }
 
@@ -19,7 +20,7 @@
     height: 200px;
     display: inline-block;
     border-radius: 50%;
-    border: 2px solid black;
+    border: 2px solid #d1aa68;
 }
 .uploadImage{
     display: inline-block;
@@ -37,6 +38,14 @@
     border-Bottom: "1px solid black"
 
 }
+.header-title {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #555;
+    margin-top: 50px;
+  }
 
 @media screen and (max-width: 768px) {
     .profileEditForm {

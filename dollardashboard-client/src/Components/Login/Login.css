@@ -42,6 +42,7 @@
   .rounded {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     height: 500px;
+    background-color: #2D3A3A;
   }
   .input-with-line {
     border: none;

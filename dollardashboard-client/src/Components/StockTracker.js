@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import axios from 'axios';
+// import React, { useState, } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StockCalculator = () => {
   const [symbol, setSymbol] = useState('');
@@ -7,21 +9,30 @@ const StockCalculator = () => {
   const [numShares, setNumShares] = useState(0);
   const [currentPrice, setCurrentPrice] = useState(null);
   const [netProfit, setNetProfit] = useState(null);
+  const navigate = useNavigate();
 
   const API_KEY = 'GMWNK4H0TLUQHLFH';
   const API_ENDPOINT = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&apikey=${API_KEY}`;
+
+  useEffect(() => {
+    if (!localStorage.getItem('username')) {
+      console.log('noUser')
+      navigate('/');
+    }
+  }, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.get(API_ENDPOINT);
       const timeSeries = res.data['Time Series (Daily)'];
-      console.log("timeseries" , timeSeries)
+      console.log("timeseries", timeSeries)
       const latestDate = Object.keys(timeSeries)[0];
       const buyingPrice = parseFloat(timeSeries[buyingDate]['4. close']);
-      console.log("buyingPrice" , buyingPrice)
+      console.log("buyingPrice", buyingPrice)
       const currentPrice = parseFloat(timeSeries[latestDate]['4. close']);
-      console.log("currentPrice" , currentPrice)
+      console.log("currentPrice", currentPrice)
       const netProfit = ((currentPrice - buyingPrice) * numShares).toFixed(2);
       setCurrentPrice(currentPrice);
       setNetProfit(netProfit);

@@ -24,7 +24,12 @@ const LoginForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [clientID, setClientID] = useState('495016874659-ovv7sk179v4btf1e7pig37napq6kfu1u.apps.googleusercontent.com')
 
-
+  useEffect(() => {
+    localStorage.setItem('username', '');
+    localStorage.setItem('token', ''); // Store JWT in localStorage
+    localStorage.setItem('googleLogIn', false)
+   
+  }, []);
 
   console.log("loginForm")
   const handleSubmit = async (e) => {
@@ -98,7 +103,7 @@ const LoginForm = () => {
       <Row className="justify-content-center mt-5">
         <Col md={6} >
           <div className="p-4 border rounded">
-            <h2 className="text-center mb-4">Login</h2>
+            <h2 className="text-center mb-4" style={{ color: 'white' }}>Login</h2>
             {showAlert && (
               <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
                 Invalid credentials!
@@ -106,7 +111,7 @@ const LoginForm = () => {
             )}
             <Form onSubmit={handleSubmit} >
               <Form.Group controlId="formEmail">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label style={{ color: 'white' }}>Email address</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Enter email"
@@ -117,7 +122,7 @@ const LoginForm = () => {
               </Form.Group>
 
               <Form.Group controlId="formPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label style={{ color: 'white' }}>Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Password"
@@ -128,12 +133,12 @@ const LoginForm = () => {
               </Form.Group>
 
               <div className="d-flex justify-content-between">
-                <Button variant="primary" type="submit" style={{width:'80%'}}>
+                <Button variant="primary" type="submit" style={{ width: '80%' }}>
                   Login
                 </Button>
               </div>
-              <div className="d-flex justify-content-between" style={{ marginLeft: '20%',marginTop:'10  px'}}>
-              <GoogleLogin
+              <div className="d-flex justify-content-between" style={{ marginLeft: '20%', marginTop: '10px' }}>
+                <GoogleLogin
                   style={{}}
                   onSuccess={credentialResponse => {
                     console.log(credentialResponse);
@@ -143,13 +148,13 @@ const LoginForm = () => {
                     console.log('Login Failed');
                   }}
                 />
-       
-                </div>
-                
+
+              </div>
+
 
             </Form>
             <div className="already-member-login">
-              <span>New User?</span>
+              <span style={{ color: 'white' }}>New User?</span>
               <a href="/register">
                 <Button variant="link">Register</Button>
               </a>

@@ -5,12 +5,28 @@ import axios from 'axios';
 import "./animation.css"
 import 'react-datepicker/dist/react-datepicker.css';
 import SavingGoals from './SavingGoals';
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { HamBurger } from './HamBurger/HamBurger';
 
 const SaveGoalForm = () => {
   const [goalName, setGoalName] = useState('');
   const [target, setTargetAmount] = useState('');
   const [endDate, setGoalEndDate] = useState(new Date());
+  const navigate = useNavigate();
 //   const [userId, setUserId] = useState(localStorage.getItem('token'));
+
+useEffect(() => {
+
+  if(!localStorage.getItem('username')){
+      console.log('noUser')
+      navigate('/');
+      //alert('helo')
+    }
+
+}, []);
+
+
 
   const handleSaveGoal = async (e) => {
     e.preventDefault();
@@ -52,7 +68,9 @@ const SaveGoalForm = () => {
   };
 
   return (
-    <div className="form-container">
+    <>
+    <HamBurger></HamBurger>
+    <div className="form-container" >
       <div className="form-wrapper">
         <h1 className="form-heading">Start Your Saving Goal Today</h1>
         <Form className="form" onSubmit={handleSaveGoal}>
@@ -94,6 +112,7 @@ const SaveGoalForm = () => {
       </div>
       <SavingGoals/>
     </div>
+    </>
 
   );
 };

@@ -1,0 +1,117 @@
+/* Reset all margins, paddings, and text decorations */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  
+  /* Body background color and font settings */
+  body {
+    background-color: #d1aa68;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Flex container */
+  .containerSideBar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgb(231, 237, 232);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+  
+  /* Main content section */
+  main {
+    width: 100%;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    background-color: #000;
+    color: #fff;
+    height: 100vh;
+    width: 200px;
+    transition: all 0.5s;
+  }
+  
+  /* Top section */
+  .top_section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 15px;
+  }
+  
+  /* Logo */
+  .logo {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+  }
+  
+  /* Bars icon */
+  .bars {
+    display: flex;
+    font-size: 25px;
+    margin-left: 50px;
+    color: #fff;
+  }
+  
+  /* Navigation links */
+  .link {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+    border-radius: 5px;
+  }
+  
+  /* Navigation link hover state */
+  .link:hover {
+    background-color: #8bc34a;
+    color: #fff;
+    transition: all 0.5s;
+  }
+  
+  /* Active navigation link */
+  .active {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  /* Icon and link text */
+  .icon, .link_text {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* Footer section */
+  footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  /* Footer link */
+  .footer_link {
+    color: #fff;
+    text-decoration: underline;
+    transition: all 0.5s;
+  }
+  
+  /* Footer link hover state */
+  .footer_link:hover {
+    color: #8bc34a;
+    transition: all 0.5s;
+  }
