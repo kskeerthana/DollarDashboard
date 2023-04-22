@@ -1,0 +1,17 @@
+.card-header {
+    display: flex;
+    justify-content: center;
+  }
+  
+Nav {
+    text-align: center !important;
+  }
+
+.button-group-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+.button-group-container .btn {
+    margin-right: 10px;
+  }

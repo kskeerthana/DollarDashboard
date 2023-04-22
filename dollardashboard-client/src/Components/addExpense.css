@@ -1,0 +1,26 @@
+Navbar{
+  display: flex;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.mr-auto{
+  display: flex;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
+  
+  
+  
+  
+  
+  
+  
