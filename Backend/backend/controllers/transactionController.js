@@ -1,6 +1,7 @@
 const TransactionModel = require("../models/transactions");
 const userModel = require("../models/userModel");
 const transactionService = require("../services/transactionServices");
+// const TransactionModel = require("../models/transactions");
 
 
 exports.getAllTransactions = async (req, res) => {
@@ -12,6 +13,13 @@ exports.getAllTransactions = async (req, res) => {
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
+  };
+
+  exports.getAll = async (req, res) => {
+    // const { user } = req;
+    const transactions = await TransactionModel.find()
+    res.json(transactions)
+    
   };
 
   exports.getParticularTransactions = async (req, res) => {
@@ -77,6 +85,18 @@ exports.getAllTransactions = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   };
+
+  exports.adminUpdateTransaction = async (req, res) => {
+    try {
+      console.log('id ey recognize aagale',req.params.id)      
+
+      const transaction = await transactionService.updateTransaction(req.params.id, req.body);
+      res.json({ data: transaction, status: "success" });
+
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
    
   exports.deleteTransaction = async (req, res) => {
     try {
@@ -91,6 +111,17 @@ exports.getAllTransactions = async (req, res) => {
         res.status(401)
         throw new Error('User not authorized')
       }
+      const transaction = await TransactionModel.findByIdAndRemove(req.params.id);
+      res.json({ data: transaction, status: "success" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
+
+  exports.adminDeleteTransaction = async (req, res) => {
+    try {
+      const transDelete = await TransactionModel.findById(req.params.id)
+      console.log('delete',transDelete)
       const transaction = await TransactionModel.findByIdAndRemove(req.params.id);
       res.json({ data: transaction, status: "success" });
     } catch (err) {

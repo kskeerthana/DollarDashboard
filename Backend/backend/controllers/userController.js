@@ -12,7 +12,7 @@ const fs = require("fs");
 // access Public
 const registerUser = asyncHandler(async (req, res) => {
 
-    const { name, email, password } = req.body
+    const { name, email, password, isAdmin } = req.body
 
     if (!name || !name.match(/^[a-zA-Z]+ [a-zA-Z]+$/)) {
         res.status(400);
@@ -24,12 +24,12 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("Please enter a valid name");
       }
 
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    // const validEmail = emailRegex.test(email) && email.endsWith('@northeastern.edu')
-    // if (!validEmail) {
-    // res.status(400)
-    // throw new Error('Please enter a valid Northeastern University email address')
-    // }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const validEmail = emailRegex.test(email) && email.endsWith('@northeastern.edu')
+    if (!validEmail) {
+    res.status(400)
+    throw new Error('Please enter a valid Northeastern University email address')
+    }
 
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
     const validPassword = passwordRegex.test(password)
@@ -55,7 +55,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        isAdmin,
     })
 
     if(user){
@@ -63,6 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            isAdmin: user.isAdmin,
             token: generateToken(user._id)
         })
     }
@@ -192,6 +194,53 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     });
 });
 
+
+const adminUpdateUserDetails = asyncHandler(async (req, res) => {
+
+    res.set('Access-Control-Allow-Origin', '*');
+    const { name, password, email, age, gender, contact, googleSignIn, } = req.body;
+    var user;
+    console.log('Update user details');
+    
+    console.log(req.body)
+    user = await User.findById(req.params.id);
+    console.log(user)
+
+    if (!user) {
+        res.status(404);
+        throw new Error("User not found");
+    }
+    // if (email) {
+    //     res.status(400)
+    //     throw new Error('You can\'t update your email')
+    // }
+    // if (name) {
+    //     if (!name.match(/^[a-zA-Z]+ [a-zA-Z]+$/)) {
+    //         res.status(400);
+    //         throw new Error('Please enter a valid full name');
+    //     }
+    // }
+
+    console.log("gs",googleSignIn)
+
+    user.name = name,
+    user.email = user.email,
+    user.age = age,
+    user.gender = gender,
+    user.contact = contact
+
+    const updatedUser = await user.save();
+
+    res.json({
+        _id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        password: updatedUser.password,
+        age: updatedUser.age,
+        gender: updatedUser.gender,
+        contact: updatedUser.contact
+    });
+});
 // @desc Authenticate a user
 // @route Post /api/users/login
 // access Public
@@ -206,6 +255,7 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            isAdmin: user.isAdmin,
             token: generateToken(user._id)
         })
     } else {
@@ -219,9 +269,9 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route Delete /api/users/delete
 // access Public
 const deleteUser = asyncHandler(async (req, res) => {
-    const { email } = req.body;
-
-    const user = await User.findOneAndDelete({ email });
+    
+    console.log(req.params.id)
+    const user = await User.findByIdAndDelete(req.params.id);
 
     if (!user) {
         res.status(404);
@@ -296,4 +346,5 @@ module.exports = {
     // updateUserDetails_New
     imageUpload,
     getImage,
+    adminUpdateUserDetails
 }
