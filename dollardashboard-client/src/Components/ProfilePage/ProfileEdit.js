@@ -5,11 +5,13 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Form, Alert } from 'react-bootstrap';
 import { FaUpload } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 // import { imageHolder } from '../ProfilePage/ImageHolder/profileImageHolder.png'
 import imageHolder from '../ProfilePage/ImageHolder/profileImageHolder.png';
 import './profileEdit.css';
 import Sidebar from '../SideBar/Sidebar';
-import { HamBurger } from '../HamBurger/HamBurger';
+//import { HamBurger } from '../HamBurger/HamBurger';
+import { NavigationBar } from '../NavigationBar/NavigationBar'
 
 export const ProfileEdit = () => {
 
@@ -22,8 +24,7 @@ export const ProfileEdit = () => {
     const [image, setImage] = useState(null);
     const [imageName, setImageName] = useState('');
     const [userUpdated, setUserUpdated] = useState(false);
-    const [base64String, setBase64] = useState(undefined)
-
+    const [base64String, setBase64] = useState(undefined);
 
     useEffect(() => {
         if (!localStorage.getItem('username')) {
@@ -164,7 +165,8 @@ export const ProfileEdit = () => {
 
     return (
         <>
-                    <HamBurger></HamBurger>
+                    {/* <HamBurger></HamBurger> */}
+                    <NavigationBar></NavigationBar>
                     <h1 class="header-title">User Profile Page</h1>
                     <div>
 
@@ -228,4 +230,4 @@ export const ProfileEdit = () => {
                 )
 }
 
-// export default ProfileEdit;
+export default ProfileEdit;

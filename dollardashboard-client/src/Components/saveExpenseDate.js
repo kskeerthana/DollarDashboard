@@ -6,9 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
+import './saveExpense.css'
 
 
-function TransactionsByMonth() {
+function SaveExpenseDate() {
 
   const [transactionId, setTransactionId] = useState("")
   const [updateDetails, setUpdateDetails] = useState({
@@ -50,6 +51,7 @@ function TransactionsByMonth() {
   
 
   useEffect(() => {
+    console.log("in expense")
     // Fetch transactions for the selected month
     if (selectedMonth) {
       fetchTransactions(selectedMonth);
@@ -133,7 +135,8 @@ function TransactionsByMonth() {
   // }
 
   return(
-  <Card>
+    <><div style={{}}></div>
+  <Card className="card-container" style={{margin:'auto'}}>
     <Card.Header>
       <Nav variant="tabs">
         <Nav.Item>
@@ -200,7 +203,7 @@ function TransactionsByMonth() {
                         Cancel
                       </Button>
                       <Button variant="primary" onClick={async (e) =>{
-                        e.preventDefault();
+                          e.preventDefault();
                           console.log(transaction._id)
                             const token = localStorage.getItem('token');
                             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -264,7 +267,8 @@ function TransactionsByMonth() {
       )}
       </Card.Body>
       </Card>
+      </>
   );
 }
 
-export default TransactionsByMonth;  
+export default SaveExpenseDate;  

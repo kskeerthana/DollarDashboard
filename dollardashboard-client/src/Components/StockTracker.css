@@ -1,0 +1,45 @@
+.stockSearchBar{
+
+    background-color: #2D3A3A;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.stockFontSize{
+   font-size: 25px;
+  
+}
+.stockResult {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .stockResult h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .stockResult p {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .stockResult p:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+  }
+  
+  
+  @media (max-width: 767px) {
+    .result {
+      margin-top: 2rem;
+    }
+  }
+  

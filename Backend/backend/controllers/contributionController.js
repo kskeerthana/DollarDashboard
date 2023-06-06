@@ -46,6 +46,19 @@ const getGoalContribution = asyncHandler(async (req,res) => {
     console.log(contribution)
 })
 
+const getAllContributions = asyncHandler(async (req, res) => {
+    console.log("in contri")
+    const allContributions = await Contributions.find()
+    res.status(200).json(allContributions)
+  })
+
+const getUserContributionById = asyncHandler(async (req,res) => {
+    console.log(req.params.id);
+    const contribution = await Contributions.find({user: req.params.id})
+    res.status(200).json(contribution)
+    console.log(contribution)
+})
+
 // @desc Set contribution goal
 // @route POST /api/contribution
 //access Private
@@ -132,10 +145,7 @@ const deleteContribution = asyncHandler(async (req,res) => {
 // @desc Get all Contributions
 // @route GET /api/contribution/getAllContributions
 // access Public
-const getAllContributions = asyncHandler(async (req, res) => {
-    const Contributions = await Contributions.find({})
-    res.json(Contributions)
-  })
+
 
 module.exports = {
     getContribution,
@@ -144,5 +154,6 @@ module.exports = {
     setContribution,
     updateContribution,
     deleteContribution,
-    getAllContributions
+    getAllContributions,
+    getUserContributionById
 }

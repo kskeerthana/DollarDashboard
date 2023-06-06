@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 import { GoogleLogin } from '@react-oauth/google';
 //import { protect1} from '../../../../Backend/backend/middleware/authMiddleware'
 //import authService from './authService'
-import './Login.css';
+//import './Login.css';
 
 
 
@@ -35,19 +35,24 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
+    //alert('pressed')
+
 
     // Client-side validation
     const validationErrors = [];
     if (!email.trim()) {
       validationErrors.push('Email is required');
+      alert('Email is required')
     }
     if (!password.trim()) {
       validationErrors.push('Password is required');
+      alert('Password is required')
     }
     if (validationErrors.length > 0) {
       setErrors(validationErrors);
       return;
     }
+
 
     // API integration using Fetch
     try {
@@ -62,7 +67,7 @@ const LoginForm = () => {
       localStorage.setItem('username', response.data.name);
       localStorage.setItem('token', response.data.token); // Store JWT in localStorage
       localStorage.setItem('googleLogIn', false)
-      navigate('/dashboard'); // Redirect to dashboard after successful login
+      navigate('/saving'); // Redirect to dashboard after successful login
 
 
     } catch (error) {
@@ -101,8 +106,8 @@ const LoginForm = () => {
     // <div className='loginForm'>
     <Container >
       <Row className="justify-content-center mt-5">
-        <Col md={6} >
-          <div className="p-4 border rounded">
+        <Col md={6}  >
+          <div className="p-4 border rounded" style={{backgroundColor:'#2D3A3A'}}>
             <h2 className="text-center mb-4" style={{ color: 'white' }}>Login</h2>
             {showAlert && (
               <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
@@ -131,9 +136,10 @@ const LoginForm = () => {
                   className="input-with-line"
                 />
               </Form.Group>
+              <br></br>
 
               <div className="d-flex justify-content-between">
-                <Button variant="primary" type="submit" style={{ width: '80%' }}>
+                <Button variant="primary" type="submit" style={{ width: '80%',margin:'auto'}}>
                   Login
                 </Button>
               </div>

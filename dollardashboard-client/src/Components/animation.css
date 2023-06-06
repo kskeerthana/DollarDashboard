@@ -26,7 +26,7 @@
   
   .form-heading {
     text-align: center;
-    color: aliceblue;
+    /* color: aliceblue; */
     margin-bottom: 40px;
   }
   
@@ -41,7 +41,7 @@
   
   .form-label {
     font-weight: bold;
-    color: aliceblue;
+    /* color: aliceblue; */
   }
   
   .form-control {

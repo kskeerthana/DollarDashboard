@@ -73,28 +73,32 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="registration-form-container">
-      <h2>Registration Form</h2>
-      <Form onSubmit={handleSubmit}>
+    <div className="registration-form-container">    
+      <div className='register'>
+      <h2 className="text-center mb-4" style={{ color: 'white' }}>Register</h2>
+      <Form onSubmit={handleSubmit} className="registrationPage" >
         <Form.Group controlId="formName">
-          <Form.Label>Name</Form.Label>
+          <Form.Label style={{ color: 'white' }}>Name</Form.Label>
           <Form.Control type="text" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} />
         </Form.Group>
+        <br></br>
 
         <Form.Group controlId="formEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label style={{ color: 'white' }}>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </Form.Group>
+        <br></br>
 
         <Form.Group controlId="formPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label style={{ color: 'white' }}>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
-
-        <Button variant="primary" type="submit">
+        <br></br>
+        <div className="d-flex justify-content-center">
+        <Button variant="primary" type="submit" style={{ width: '80%',margin:'auto'}}>
           Register
         </Button>
-
+      </div>
         {errors.length > 0 && (
           <Alert variant="danger">
             <ul>
@@ -105,13 +109,16 @@ const RegisterForm = () => {
           </Alert>
         )}
       </Form>
+      
+      
 
-      <div className="already-member-login">
-        <span>Already a member?</span>
+      <div className="already-member-login" style={{margin:'auto'}}>
+        <span style={{ color: 'white' }}>Already a member?</span>
         <a href="/">
             <Button variant="link">Log in</Button>
         </a>
       </div>
+    </div>
     </div>
   );
 };

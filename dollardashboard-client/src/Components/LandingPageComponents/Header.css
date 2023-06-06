@@ -1,0 +1,46 @@
+header {
+  background-color: #f8f8f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #0077cc;
+}
+
+nav a.logout {
+  color: #cc0000;
+}
+
+nav a.logout:hover {
+  color: #ff0000;
+}
+
+nav a.about {
+  color: #0077cc;
+}
+
+nav a.about:hover {
+  color: #005580;
+}

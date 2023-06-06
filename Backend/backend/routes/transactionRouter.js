@@ -7,12 +7,16 @@ const {
     updateTransaction,
     deleteAllTransactions,
     deleteTransaction,
-    getParticularTransactions
-} = require("../controller/transactionController");
+    getParticularTransactions,
+    getAll,
+    adminUpdateTransaction,
+    adminDeleteTransaction
+} = require("../controllers/transactionController");
 
-const {protect} = require("../services/authService")
+const {protect} = require('../middleware/authMiddleware')
 const router = express.Router();
-
+router.route("/getAll").get(getAll);
+router.route("/admin/:id").put(adminUpdateTransaction).delete(adminDeleteTransaction);
 router.route("/getTransaction").get(protect,getAllTransactions);
 router.route("/getTransactionByCategory").get(protect,getParticularTransactions);
 router.route("/addTransaction").post(protect,createTransaction);

@@ -2,6 +2,10 @@ import React, { useState ,useEffect } from 'react';
 import axios from 'axios';
 // import React, { useState, } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import './StockTracker.css';
+import { NavigationBar } from "./NavigationBar/NavigationBar";
+// import './stockTracker.css';
 
 const StockCalculator = () => {
   const [symbol, setSymbol] = useState('');
@@ -42,84 +46,55 @@ const StockCalculator = () => {
   };
 
   return (
-    <div>
+    <>
+    <NavigationBar></NavigationBar>
+    <div className='stockSearchBar' >
+      <div style={{ textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="symbol">Select a stock:</label>
-        <select id="symbol" value={symbol} onChange={(e) => setSymbol(e.target.value)}>
+        <label htmlFor="symbol" className='stockFontSize' style={{ color: 'white',margin: '10px' }}>Select a stock:</label>
+        <select id="symbol" value={symbol} style={{margin: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '5px', border: 'none', fontSize: '16px', cursor: 'pointer' }} onChange={(e) => setSymbol(e.target.value)}>
           <option value="">-- Please select a stock --</option>
           <option value="AAPL">AAPL (Apple Inc.)</option>
           <option value="AMZN">AMZN (Amazon.com Inc.)</option>
           <option value="GOOG">GOOG (Alphabet Inc. Class C)</option>
           <option value="MSFT">MSFT (Microsoft Corporation)</option>
         </select>
-        <label htmlFor="buying-date">Enter buying date:</label>
-        <input type="date" id="buying-date" value={buyingDate} onChange={(e) => setBuyingDate(e.target.value)} />
-        <label htmlFor="num-shares">Enter number of shares purchased:</label>
-        <input type="number" id="num-shares" value={numShares} onChange={(e) => setNumShares(parseInt(e.target.value))} />
-        <button type="submit">Calculate</button>
-      </form>
-      {currentPrice && (
-        <div>
-          <h2>{symbol}</h2>
-          <p>Current price: {currentPrice}</p>
-          <p>Number of shares purchased: {numShares}</p>
-          <p>Buying price: {parseFloat(currentPrice).toFixed(2)}</p>
-          <p>Net profit/loss: {netProfit > 0 ? "+" : ""}{netProfit}</p>
+        <label htmlFor="buying-date" className='stockFontSize' style={{ color: 'white',margin: '10px', }}>Enter buying date:</label>
+        <input type="date" id="buying-date" value={buyingDate} onChange={(e) => setBuyingDate(e.target.value)} style={{margin: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '5px', border: 'none', fontSize: '16px', cursor: 'pointer' }}/>
+        <div style={{ textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center" }}> <label htmlFor="num-shares" className='stockFontSize' style={{ color: 'white',margin: '10px' }}>No shares purchased:</label>
+        
+        <input type="number" id="num-shares" value={numShares} onChange={(e) => setNumShares(parseInt(e.target.value))} style={{margin: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '5px', border: 'none', fontSize: '16px', cursor: 'pointer' }} />
+
         </div>
+        <button type="submit" style={{ backgroundColor: '#4CAF50', color: 'white', padding: '10px 20px', borderRadius: '5px', border: 'none', fontSize: '16px', cursor: 'pointer' }}>Calculate</button>
+
+        {/* <input type="number" id="num-shares" value={numShares} onChange={(e) => setNumShares(parseInt(e.target.value))} style={{margin: '10px', backgroundColor: 'white', color: 'black', padding: '10px', borderRadius: '5px', border: 'none', fontSize: '16px', cursor: 'pointer' }} /> */}
+      </form>
+      </div>
+      {currentPrice && (
+        // <div className='stockResult'>
+        //   <h2>{symbol}</h2>
+        //   <p>Current price: {currentPrice}</p>
+        //   <p>Number of shares purchased: {numShares}</p>
+        //   <p>Buying price: {parseFloat(currentPrice).toFixed(2)}</p>
+        //   <p>Net profit/loss: {netProfit > 0 ? "+" : ""}{netProfit}</p>
+        // </div>
+        <div className='stockResult'>
+        <h2>{symbol}</h2>
+        <p>Current price: {currentPrice}</p>
+        <p>Number of shares purchased: {numShares}</p>
+        <p>Buying price: {parseFloat(currentPrice).toFixed(2)}</p>
+        {typeof netProfit !== "undefined" && (
+          <p style={{ color: netProfit > 0 ? "green" : "red" }}>
+            Net profit/loss: {netProfit > 0 ? "+" : ""}{netProfit}
+          </p>
+        )}
+      </div>
+      
       )}
     </div>
+    </>
   );
 };
 
 export default StockCalculator;
-
-
-
-
-
-
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
-// const StockCalculator = () => {
-//   const [symbol, setSymbol] = useState('');
-//   const [stockData, setStockData] = useState(null);
-
-//   const API_KEY = 'GMWNK4H0TLUQHLFH';
-//   const API_ENDPOINT = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`;
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await axios.get(API_ENDPOINT);
-//       setStockData(res.data);
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <input type="text" placeholder="Enter stock symbol" value={symbol} onChange={(e) => setSymbol(e.target.value)} />
-//         <button type="submit">Search</button>
-//       </form>
-//       {stockData && (
-//         <div>
-//           <h2>{stockData['Global Quote']['01. symbol']}</h2>
-//           <p>Open: {stockData['Global Quote']['02. open']}</p>
-//           <p>High: {stockData['Global Quote']['03. high']}</p>
-//           <p>Low: {stockData['Global Quote']['04. low']}</p>
-//           <p>Price: {stockData['Global Quote']['05. price']}</p>
-//           <p>Volume: {stockData['Global Quote']['06. volume']}</p>
-//           <p>Last trade time: {stockData['Global Quote']['07. latest trading day']}</p>
-//           <p>Previous close: {stockData['Global Quote']['08. previous close']}</p>
-//           <p>Change: {stockData['Global Quote']['09. change']}</p>
-//           <p>Change percent: {stockData['Global Quote']['10. change percent']}</p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default StockCalculator;

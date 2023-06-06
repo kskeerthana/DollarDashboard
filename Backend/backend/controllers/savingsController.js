@@ -11,6 +11,11 @@ const getUserSaving = asyncHandler(async (req,res) => {
     res.status(200).json(saving)
 })
 
+const getAllSavings = asyncHandler(async (req, res) => {
+    const savings = await Savings.find()
+    res.json(savings)
+  })
+
 const getSaving = asyncHandler(async (req,res) => {
     const saving = await Savings.findById(req.params.id)
     res.status(200).json(saving)
@@ -61,6 +66,18 @@ const updateSaving = asyncHandler(async (req,res) => {
     res.status(200).json(updateSaving)
 })
 
+
+const adminUpdateSaving = asyncHandler(async (req,res) => {
+    const saving = await Savings.findById(req.params.id)
+
+    if(!saving) {
+        res.status(400)
+        throw new Error('Saving Goal not found')
+    }
+
+    const updateSaving = await Savings.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    res.status(200).json(updateSaving)
+})
 // @desc Delete saving goal
 // @route DELETE /api/saving/:id
 //access Private
@@ -89,19 +106,30 @@ const deleteSaving = asyncHandler(async (req,res) => {
     res.status(200).json(deleteSaving)
 })
 
+const adminDeleteSaving = asyncHandler(async (req,res) => {
+    const saving = await Savings.findById(req.params.id)
+
+    if(!saving) {
+        res.status(400)
+        throw new Error('Saving Goal not found')
+    }
+
+    const deleteSaving = await Savings.findByIdAndRemove(req.params.id)
+    res.status(200).json(deleteSaving)
+})
 // @desc Get all savings
 // @route GET /api/saving/getAll
 // access Public
-const getAllSavings = asyncHandler(async (req, res) => {
-    const savings = await Savings.find({})
-    res.json(savings)
-  })
+
 
 module.exports = {
     getSaving,
+    getAllSavings,
     getUserSaving,
     setSaving,
     updateSaving,
     deleteSaving,
-    getAllSavings
+    adminDeleteSaving,
+    adminUpdateSaving
+    
 }
