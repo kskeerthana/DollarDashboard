@@ -7,6 +7,7 @@ import { FaTrashAlt, FaEdit, FaPlus} from 'react-icons/fa';
 import "./SavingPage.css";
 import Contributions from './Contributions';
 import UpdateGoalModal from './SavingUpdateModal';
+import { NavigationBar } from './NavigationBar/NavigationBar';
 
 const GoalDetails = () => {
   const [goal, setGoal] = useState(null);
@@ -107,7 +108,7 @@ const GoalDetails = () => {
           Goal successfully updated!
         </Alert>
       )}
-    
+    <NavigationBar></NavigationBar>
     <div className="card-container">
       <Card className="card">
         <Card.Body>

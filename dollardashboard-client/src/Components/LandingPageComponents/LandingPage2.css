@@ -1,0 +1,52 @@
+.landing-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  
+  .landing-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .landing-col.left-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-right: 20px;
+  }
+  
+  .landing-col.right-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .landing-heading {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .landing-text {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  
+  .landing-btn {
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .landing-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  

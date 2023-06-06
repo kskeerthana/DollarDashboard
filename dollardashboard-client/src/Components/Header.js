@@ -19,6 +19,7 @@ function Header() {
     emailjs.sendForm('service_pdgfa8g', 'template_yj5ioh9', form.current, 'cEhby2bneSLwToKdo')
       .then((result) => {
           console.log(result);
+          setShowModal(false)
       }, (error) => {
           console.log(error.text);
       });

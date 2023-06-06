@@ -6,7 +6,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { Link } from "react-router-dom";
 //import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-// import './SavingGoals.css'
+//import './SavingGoals.css'
 
 const SavingGoals = () => {
   const [goals, setGoals] = useState([]);

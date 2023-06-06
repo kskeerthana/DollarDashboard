@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React,{ useState ,useEffect} from "react";
 import Button from 'react-bootstrap/Button';
 import { ButtonGroup } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +10,9 @@ import Modal from 'react-bootstrap/Modal';
 import axios from "axios";
 import SaveExpenseDate from "./saveExpenseDate";
 import './addExpense.css';
+import { NavigationBar } from "./NavigationBar/NavigationBar";
+import { useNavigate } from 'react-router-dom';
+
 // import UpdateExpense from "./updateExpense";
 
 
@@ -24,6 +27,7 @@ function NavScrollExample() {
     const [date,setDate] = useState('');
     // const [search, setSearch] = useState(''); 
     const apiUrl = 'http://127.0.0.1:8000/api'
+    const navigate = useNavigate();
 
     // const handleSearchShow = () => setShowSearch(true);
     // const handleSearchClose = () => setShowSearch(false);
@@ -79,8 +83,16 @@ function NavScrollExample() {
       setSearchTerm(event.target.value);
     };
 
+    useEffect(() => {
+      if (!localStorage.getItem('username')) {
+          console.log('noUser')
+          navigate('/');
+      }
+  }, []);
+
     return (
-      <div>
+      <div >
+        <NavigationBar></NavigationBar>
       <Navbar bg="light" expand="sm">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -100,8 +112,10 @@ function NavScrollExample() {
           </Button>
         </Navbar.Collapse>
       </Navbar>
+      <br></br>
+      <SaveExpenseDate/>
 
-      <div className="container mt-3">
+      <div className="card-container">
         {transactions.map((transaction) => (
           <div key={transaction.title} className="card mb-3">
             <div className="card-body">
@@ -157,7 +171,7 @@ function NavScrollExample() {
 
                 </Modal.Footer>
             </Modal>
-            <SaveExpenseDate/>
+            
       </div>
       </div>
       

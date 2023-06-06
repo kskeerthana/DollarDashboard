@@ -8,6 +8,8 @@ import SavingGoals from './SavingGoals';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { HamBurger } from './HamBurger/HamBurger';
+import { NavigationBar } from './NavigationBar/NavigationBar';
+// import { NavigationBar } from '../NavigationBar/NavigationBar'
 
 const SaveGoalForm = () => {
   const [goalName, setGoalName] = useState('');
@@ -69,13 +71,14 @@ useEffect(() => {
 
   return (
     <>
-    <HamBurger></HamBurger>
+    {/* <HamBurger></HamBurger> */}
+    <NavigationBar></NavigationBar>
     <div className="form-container" >
       <div className="form-wrapper">
-        <h1 className="form-heading">Start Your Saving Goal Today</h1>
+        <h1 className="form-heading" style={{color: 'aliceblue'}}>Start Your Saving Goal Today</h1>
         <Form className="form" onSubmit={handleSaveGoal}>
           <Form.Group controlId="formGoalName">
-            <Form.Label>Goal Name</Form.Label>
+            <Form.Label style={{color: 'aliceblue'}}>Goal Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter goal name"
@@ -83,9 +86,10 @@ useEffect(() => {
               onChange={(e) => setGoalName(e.target.value)}
             />
           </Form.Group>
+          <br></br>
 
           <Form.Group controlId="formTargetAmount">
-            <Form.Label>Target Amount</Form.Label>
+            <Form.Label style={{color: 'aliceblue',padding:'auto'}}>Target Amount</Form.Label>
             <Form.Control
               type="number"
               placeholder="Enter target amount"
@@ -93,9 +97,10 @@ useEffect(() => {
               onChange={(e) => setTargetAmount(e.target.value)}
             />
           </Form.Group>
+          <br></br>
 
           <Form.Group controlId="formGoalEndDate">
-            <Form.Label>Goal End Date</Form.Label>
+            <Form.Label style={{color: 'aliceblue',padding:'auto'}}>Goal End Date</Form.Label>
             <DatePicker
               className="form-control"
               selected={endDate}
